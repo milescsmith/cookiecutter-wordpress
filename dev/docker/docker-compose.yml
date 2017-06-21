@@ -1,0 +1,8 @@
+version: '2'
+services:
+  cc_wp_devbox:
+    build: ./devbox
+    image: ccwp:devbox
+    container_name: cc_wp_devbox
+    volumes: 
+      - ./../../:/src
