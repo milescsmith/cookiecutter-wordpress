@@ -1,2 +1,12 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# test generated files
+.cache
+.coverage
+.tox
+
 # dev tools
 .idea

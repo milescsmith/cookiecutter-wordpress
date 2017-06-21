@@ -1,0 +1,7 @@
+# lint tools
+pep8
+
+# test tools
+pytest
+pytest-cookies
+tox
