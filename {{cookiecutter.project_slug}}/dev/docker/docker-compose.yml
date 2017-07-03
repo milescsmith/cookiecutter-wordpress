@@ -1,0 +1,30 @@
+version: "3"
+services:
+  {{ cookiecutter.project_slug }}_devbox:
+    build: ./devbox
+    image: {{ cookiecutter.project_slug }}:devbox
+    container_name: {{ cookiecutter.project_slug }}_devbox
+    volumes:
+      - ./../../:/src
+  {{ cookiecutter.project_slug }}_db:
+    image: mysql
+    container_name: {{ cookiecutter.project_slug }}_db
+    volumes:
+      - ./../../:/src
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: wp_db
+      MYSQL_USER: wp_user
+      MYSQL_PASSWORD: wp_password
+  {{ cookiecutter.project_slug }}_web:
+    build: ./web
+    image: "{{ cookiecutter.project_slug }}:web"
+    container_name: {{ cookiecutter.project_slug }}_web
+    volumes:
+      - ./../../public_html:/var/www/html
+    ports:
+      - "9180:80"
+    links:
+      - {{ cookiecutter.project_slug }}_db
+    environment:
+      DATABASE_URL: "mysql://wp_user:wp_password@{{ cookiecutter.project_slug }}_db:3306/wp_db"
