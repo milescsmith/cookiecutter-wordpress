@@ -32,6 +32,7 @@ class TestCreateTemplate(SetupTemplate):
 
     files = (
         ("composer.json"),
+        ("Makefile"),
     )
 
     @pytest.mark.parametrize("file", files)
@@ -72,3 +73,20 @@ class TestComposerJson(SetupTemplate):
     def test_has_wordpress_version(self, context, parsed_file):
         assert parsed_file["require"]["johnpbloch/wordpress"] == \
                context["wordpress_version"]
+
+
+class TestMakefile(SetupTemplate):
+    @pytest.fixture
+    def file(self, template):
+        return template.project.join("Makefile").readlines()
+
+    def test_not_empty(self, file):
+        assert len(file) is not 0
+
+    targets = (
+        ("install: composer.json\n"),
+    )
+
+    @pytest.mark.parametrize("target", targets)
+    def test_contains_target(self, file, target):
+        assert target in file
