@@ -4,5 +4,6 @@
     "project_short_description": "WordPress installation project.",
     "release_date": "{% now 'local' %}",
     "version": "0.1.0",
+    "wordpress_version": "*",
     "_extensions": ["jinja2_time.TimeExtension"]
 }

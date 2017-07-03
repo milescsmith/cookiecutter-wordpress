@@ -1,0 +1,32 @@
+{
+  "name": "{{ cookiecutter.project_name }}",
+  "version": "{{ cookiecutter.version }}",
+  "type": "project",
+  "keywords": [],
+  "minimum-stability": "stable",
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://wpackagist.org"
+    }
+  ],
+  "require": {
+    "johnpbloch/wordpress": "{{ cookiecutter.wordpress_version }}",
+    "wpackagist-plugin/akismet": "*",
+    "wpackagist-plugin/amazon-s3-and-cloudfront": "*",
+    "wpackagist-plugin/amazon-web-services": "*",
+    "wpackagist-plugin/disable-wordpress-updates":"*",
+    "wpackagist-plugin/google-analytics-for-wordpress":"*",
+    "wpackagist-plugin/skimlinks":"*",
+    "wpackagist-plugin/wordpress-importer":"*",
+    "wpackagist-plugin/wordpress-seo":"*",
+    "wpackagist-theme/twentyseventeen": "*"
+  },
+  "extra": {
+    "wordpress-install-dir": "public_html/core",
+    "installer-paths":{
+      "public_html/content/plugins/{$name}/": ["type:wordpress-plugin"],
+      "public_html/content/themes/{$name}/": ["type:wordpress-theme"]
+    }
+  }
+}
