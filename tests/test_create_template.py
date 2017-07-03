@@ -33,6 +33,7 @@ class TestCreateTemplate(SetupTemplate):
     files = (
         ("composer.json"),
         ("Makefile"),
+        ("README.md"),
     )
 
     @pytest.mark.parametrize("file", files)
@@ -90,3 +91,25 @@ class TestMakefile(SetupTemplate):
     @pytest.mark.parametrize("target", targets)
     def test_contains_target(self, file, target):
         assert target in file
+
+
+class TestReadme(SetupTemplate):
+    @pytest.fixture
+    def context(self):
+        return {
+            "project_name": "Latin",
+            "project_short_description": "Lore ipsums"
+        }
+
+    @pytest.fixture
+    def file(self, template):
+        return template.project.join("README.md").readlines()
+
+    def test_not_empty(self, file):
+        assert len(file) is not 0
+
+    def test_contains_project_name(self, context, file):
+        assert context["project_name"] in "".join(file)
+
+    def test_contains_short_description(self, context, file):
+        assert context["project_short_description"] in "".join(file)
