@@ -10,4 +10,4 @@ lint: install_dev
 test: unittest
 
 unittest: install_dev
-	pytest --verbose tests
+	pytest --verbose tests/unit
